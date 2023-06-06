@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import SignIn from "./components/auth/SignIn";
 import Subscribe from "./components/auth/Subscribe";
+import Article from "./components/articles/Article";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/signin" element={<SignIn />} />
               <Route path="/subscribe" element={<Subscribe />} />
+              <Route path="/article" element={<Article />} />
             </Routes>
           </div>
         </Router>
