@@ -1,34 +1,113 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
+import "react-magic-slider-dots/dist/magic-dots.css";
+import { Link } from "react-router-dom";
+
+const URLForTopNews = "https://gnews.io/api/v4/top-headlines";
+
 const Latest = () => {
-  const news = {
-    category: "Sports",
-    image:
-      "https://e1.365dm.com/15/10/768x432/sanzar-rugby-on-sky-rugby-union_3366258.jpg?20151020121945",
-    author: "Anna Mercury",
-    date: "January 11, 2022",
-    title: "Herschel Walker leads Georgia celebration as Bulldogs beat Alabama for national title",
-    description:
-      "Herschel Walker was the star freshman running back on Hawks when he led the bull dogs to their last national championship in 1980.",
+  const [topArticles, setTopArticles] = useState([]);
+
+
+  useEffect(function effectFunction() {
+    async function fetchTopArticles() {
+      const res = await axios.get(URLForTopNews, {
+        params: {
+          category: "Business",
+          apikey: "9d2382edba75594fa4e4921e2144e3e2",
+          lang: "en",
+          country: "us",
+          max: 20,
+        },
+      });
+      setTopArticles(res.data.articles);
+    }
+
+    fetchTopArticles();
+    console.log(topArticles);
+  }, []);
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const prevSlide = () => {
+    const isFirstSlide = currentIndex === 0;
+    const newIndex = isFirstSlide ? topArticles.length - 1 : currentIndex - 1;
+    setCurrentIndex(newIndex);
+  };
+
+  const nextSlide = () => {
+    const isLastSlide = currentIndex === topArticles.length - 1;
+    const newIndex = isLastSlide ? 0 : currentIndex + 1;
+    setCurrentIndex(newIndex);
+  };
+
+  const goToSlide = (newsIndex) => {
+    setCurrentIndex(newsIndex);
   };
 
   return (
-    <div className="relative mt-10 pb-40">
-      <img src={news.image} className="w-screen rounded-xl" alt="rugby" />
-      <div className="absolute top-10 left-10 bg-white p-2 w-32 text-center font-kanit rounded-3xl">
-        {news.category}
-      </div>
-      <div className="absolute p-16 top-96 left-28 right-28 bg-white ">
-        <div className="flex font-libre text-xs text-gray-400 pb-6">
-          <div>{news.author} </div>
-          &nbsp; &nbsp; <span> <hr className="h-0.5 w-4 mt-2 bg-gray-300"/></span> &nbsp; &nbsp;
-          <div>{news.date}</div>
-        </div>
-        <div className="font-lora">
-          <div className="text-5xl text-gray-800 ">{news.title}</div>
-          <div className="text-sm text-gray-400 mt-5">{news.description}</div>
-        </div>
-      </div>
+    <>
+      {topArticles && topArticles.length && (
+        <div className="max-w-[1400px] h-[780px] w-full m-auto py-16 px-4 relative group">
+          <Link
+            to={`/${new Date(
+              topArticles[currentIndex].publishedAt
+            ).getFullYear()}/${topArticles[currentIndex].title.replaceAll(
+              ",",
+              "-"
+            )}`}
+            state={{ article: topArticles[currentIndex] }}
+          >
+            <img 
+              src={`${topArticles[currentIndex].image}`} alt="img"
+              className="w-full h-full rounded-2xl bg-cover duration-500"
+            />
+          </Link>
 
-    </div>
+          <div className="hidden group-hover:block absolute top-[45%] -translate-x-0 translate-y-[50%] left-10 rounded-full p-2 bg-black/20 text-white cursor-pointer">
+            <BsChevronCompactLeft onClick={prevSlide} size={30} />
+          </div>
+          <div className="hidden group-hover:block absolute top-[45%] -translate-x-0 translate-y-[50%] right-10 rounded-full p-2 bg-black/20 text-white cursor-pointer">
+            <BsChevronCompactRight onClick={nextSlide} size={30} />
+          </div>
+          <div className="absolute top-28 left-16 bg-white p-2 w-32 text-center font-kanit rounded-3xl">
+            Sports
+          </div>
+          <div className="absolute p-12 top-2/3 left-28 right-28 bg-white">
+            <div className="flex font-libre text-xs text-gray-400 pb-6">
+              <div>{topArticles[currentIndex].source.name}</div>
+              &nbsp; &nbsp;
+              <span>
+                <hr className="h-0.5 w-4 mt-2 bg-gray-300" />
+              </span>
+              &nbsp; &nbsp;
+              <div>
+                {new Date(topArticles[currentIndex].publishedAt).getUTCFullYear()}
+              </div>
+            </div>
+            <div className="font-lora">
+              <div className="text-5xl text-gray-800">
+                {topArticles[currentIndex].title}
+              </div>
+              <div className="text-sm text-gray-400 mt-5">
+                {topArticles[currentIndex].description}
+              </div>
+            </div>
+          </div>
+
+          <div className="flex top-4 justify-center py-2">
+            {topArticles.map((news, newsIndex) => {
+              <div
+                key={newsIndex}
+                onClick={() => goToSlide(newsIndex)}
+                className="text-2xl cursor-pointer"
+              ></div>;
+            })}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
