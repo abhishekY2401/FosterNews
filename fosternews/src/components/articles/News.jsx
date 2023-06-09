@@ -3,6 +3,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 const URL = "https://gnews.io/api/v4/search"
+const API_KEY = import.meta.env.VITE_APP_NEWS_API_KEY
+
 
 const News = () => {
   const [news, setNews] = useState([]);
@@ -12,7 +14,7 @@ const News = () => {
         const res = await axios.get(URL, {
           params: {
             q: "Sports",
-            apikey: "9d2382edba75594fa4e4921e2144e3e2",
+            apikey: API_KEY,
             lang: "en",
             country: "us",
             max: 10,

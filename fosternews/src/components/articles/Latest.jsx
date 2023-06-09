@@ -4,17 +4,17 @@ import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 const URLForTopNews = "https://gnews.io/api/v4/top-headlines";
+const API_KEY = import.meta.env.VITE_APP_NEWS_API_KEY
 
 const Latest = () => {
   const [topArticles, setTopArticles] = useState([]);
-
 
   useEffect(function effectFunction() {
     async function fetchTopArticles() {
       const res = await axios.get(URLForTopNews, {
         params: {
           category: "Business",
-          apikey: "9d2382edba75594fa4e4921e2144e3e2",
+          apikey: API_KEY,
           lang: "en",
           country: "us",
           max: 20,
