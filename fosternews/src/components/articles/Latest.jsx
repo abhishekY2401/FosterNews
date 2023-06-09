@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
-import "react-magic-slider-dots/dist/magic-dots.css";
 import { Link } from "react-router-dom";
 
 const URLForTopNews = "https://gnews.io/api/v4/top-headlines";
