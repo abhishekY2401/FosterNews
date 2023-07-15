@@ -4,11 +4,12 @@ import Home from "./components/Home";
 import SignIn from "./components/auth/SignIn";
 import Subscribe from "./components/auth/Subscribe";
 import Article from "./components/articles/Article";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <>
-      <div className="pl-32 pr-32">
+      <div>
         <Router>
           <Navbar />
           <div>
@@ -19,6 +20,7 @@ function App() {
               <Route path="/:year/:title" element={<Article />} />
             </Routes>
           </div>
+          <Footer />
         </Router>
       </div>
     </>
