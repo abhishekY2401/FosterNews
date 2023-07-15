@@ -13,7 +13,8 @@ export default {
         lora: ['"Lora", serif'],
         quicksand: ['"Quicksand", sans-serif'],
         libre: ['"Libre Franklin", sans-serif'],
-        common: ['"Georgia,Cambria","Times New Roman","Times",serif']
+        common: ['"Georgia,Cambria","Times New Roman","Times",serif'],
+        merri: ['"Merriweather", serif']
       }
     },
   },
