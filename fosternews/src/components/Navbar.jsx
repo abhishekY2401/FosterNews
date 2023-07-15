@@ -7,7 +7,7 @@ import "./navbar.css";
 const Navbar = () => {
   return (
     <>
-      <div className="flex items-center justify-between pt-6">
+      <div className="flex items-center justify-between pt-6 pl-32 pr-32 ">
         <div className="flex mr-4 my-2 items-center justify-end">
           <input
             type="search"

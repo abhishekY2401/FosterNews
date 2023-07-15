@@ -3,29 +3,24 @@ import axios from "axios";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
-const URLForTopNews = "https://gnews.io/api/v4/top-headlines";
-const API_KEY = import.meta.env.VITE_APP_NEWS_API_KEY
+const URLForTopNews = "http://127.0.0.1:5000/all_news";
 
 const Latest = () => {
   const [topArticles, setTopArticles] = useState([]);
 
-  useEffect(function effectFunction() {
-    async function fetchTopArticles() {
-      const res = await axios.get(URLForTopNews, {
-        params: {
-          category: "Business",
-          apikey: API_KEY,
-          lang: "en",
-          country: "us",
-          max: 20,
-        },
-      });
-      setTopArticles(res.data.articles);
-    }
+  useEffect(function effect() {
+      async function fetchArticles() {
+        const res = await axios.get(URLForTopNews, {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': "*"
+        });
+        console.log(res.data);
+        setTopArticles(res.data);
+      }
 
-    fetchTopArticles();
+    fetchArticles();
     console.log(topArticles);
-  }, []);
+  }, [])
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -71,7 +66,7 @@ const Latest = () => {
             <BsChevronCompactRight onClick={nextSlide} size={30} />
           </div>
           <div className="absolute top-28 left-16 bg-white p-2 w-32 text-center font-kanit rounded-3xl">
-            Sports
+            Breaking
           </div>
           <div className="absolute p-12 top-2/3 left-28 right-28 bg-white">
             <div className="flex font-libre text-xs text-gray-400 pb-6">
