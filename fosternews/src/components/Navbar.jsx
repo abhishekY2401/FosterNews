@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Search } from "../assets/Search.jsx";
 import SignIn from "./auth/SignIn";
 import Subscribe from "./auth/Subscribe";
+import Register from "./auth/Register.jsx";
 import "./navbar.css";
 
 const Navbar = () => {
@@ -28,9 +29,15 @@ const Navbar = () => {
         </div>
 
         <div className="p-1.5 w-24 bg-red-700 rounded-full text-center">
-        <Link to="/signin" element={<SignIn />}>
-            <span className="text-white font-quicksand text-sm">Sign In</span>
-        </Link>
+          <Link to="/signin" element={<SignIn />}>
+              <span className="text-white font-quicksand text-sm">Sign In</span>
+          </Link>
+        </div>
+
+        <div className="p-1.5 w-44 bg-sky-700 rounded-full text-center">
+          <Link to="/create-account" element={<Register />}>
+              <span className="text-white font-quicksand text-sm">Create Account</span>
+          </Link>
         </div>
         <div className="p-1.5 w-36 bg-black rounded-full text-center">
         <Link to="/subscribe" element={<Subscribe />}>
