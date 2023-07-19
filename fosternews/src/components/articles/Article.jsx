@@ -9,20 +9,20 @@ const Article = () => {
   const location = useLocation();
   const { article } = location.state;
 
-  const { title, content, images } = article;
-  // const description = content
-  //   .replace("[", " ")
-  //   .replace("'", " ")
-  //   .replace(")", " ")
-  //   .replace("(", " ")
-  //   .replace(",", " ")
-  //   .replace("]", " ")
-  //   .replace('"', " ")
-  //   .replace("'", " ")
-  //   .replace('"', " ")
-  //   .replace('"', " ")
-  //   .replace("“", " ")
-  //   .replace("”", " ");
+  const { title, source, author, content, images } = article;
+  const description = content[0]
+    .replace("[", " ")
+    .replace("'", " ")
+    .replace(")", " ")
+    .replace("(", " ")
+    .replace(",", " ")
+    .replace("]", " ")
+    .replace('"', " ")
+    .replace("'", " ")
+    .replace('"', " ")
+    .replace('"', " ")
+    .replace("“", " ")
+    .replace("”", " ");
 
   const heading = title.replace("'", " ");
 
@@ -49,16 +49,14 @@ const Article = () => {
             <div className="flex items-center justify-center w-10 h-10 border-2 border-gray-300 rounded-full">
              <img src={bookmark} className="w-20 h-5" alt="bookmark" />
             </div>
-            
-            
-            
           </div>
         </div>
         <div className="pr-60 pl-60 flex flex-col justify-between gap-10">
-          <div className="pt-10 flex items-center gap-2 text-black text-base font-quicksand">
-            <p></p>
-            <hr className="h-0.5 w-2 bg-black" />
-            <p>{new Date().getFullYear()}</p>
+          <div className="pt-10 flex items-center justify-between gap-2 text-black text-base font-quicksand">
+            <p>{author}&nbsp; <span>-</span> &nbsp;{new Date().getFullYear()}</p>
+            <div className="font-quicksand">
+              Source: {source}
+            </div>
           </div>
 
           <hr className="h-0.5 font-bold bg-gray-400" />
@@ -70,7 +68,7 @@ const Article = () => {
             />
           </div>
           <div className=" text-base font-merri tracking-wider">
-            {content[0]}
+            {description}
           </div>
         </div>
       </div>

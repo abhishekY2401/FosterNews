@@ -30,7 +30,8 @@ const ListNews = () => {
   };
   const [news, setNews] = useState([]);
   const [err, setErr] = useState(false);
-  const [errMsg, setErrMsg] = useState("");
+
+ 
 
   useEffect(function effect() {
       async function fetchArticles() {
@@ -39,12 +40,12 @@ const ListNews = () => {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': "*"
           });
-          console.log(res.data);
+          console.log(res.data.articles);
           setNews(res.data);
           setErr(false);
+          localStorage.setItem('news', JSON.stringify(res.data))
         } catch (err) {
           setErr(true)
-          setErrMsg("News could not be fetched!")
         }
         
       }
@@ -52,6 +53,13 @@ const ListNews = () => {
     fetchArticles();
     console.log(news);
   }, [])
+
+  useEffect(() => {
+    const article = JSON.parse(localStorage.getItem('news'));
+    if (article) 
+      setNews(article)
+  }, [news])
+  
   //   useEffect(function effect() {
   //     async function fetchArticles() {
   //       const res = await axios.get(URL, {
@@ -75,10 +83,8 @@ const ListNews = () => {
         options={defaultOptionsErr}
         height={400}
         width={800}
-      /></div>) : news.all_articles && news.all_articles.length ? (
-      news.all_articles.map((article) => {
-        const news_article = article.articles;
-       return (news_article.map((live_news, key) => {
+      /></div>) : news.articles && news.articles.length ? (
+      news.articles.map((live_news, key) => {
         return (
         <div key={key} className="pt-32 flex flex-col w-96">
           <div className="font-kanit absolute flex items-center justify-center mt-5 ml-5 pl-8 pr-8 h-10 bg-white rounded-3xl">{live_news.category}</div>
@@ -91,8 +97,7 @@ const ListNews = () => {
           </Link>
           <div className="pt-10 pb-10">
             <div className="font-libre flex text-xs text-gray-500">
-              <p>{} </p>
-              <p>&nbsp;&nbsp;-&nbsp; {new Date().getFullYear()} &nbsp;&nbsp;&nbsp;</p>
+              <p>{live_news.author}&nbsp;&nbsp;-&nbsp; {new Date().getFullYear()} &nbsp;&nbsp;&nbsp;</p>
             </div>
             <div className="font-lora text-2xl text-gray-700 mt-2">
               {live_news.title}
@@ -102,7 +107,7 @@ const ListNews = () => {
           
         </div>
       )
-       }))
+       
       })
     ) : (
       <Lottie 
