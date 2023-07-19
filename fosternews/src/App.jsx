@@ -5,6 +5,7 @@ import SignIn from "./components/auth/SignIn";
 import Subscribe from "./components/auth/Subscribe";
 import Article from "./components/articles/Article";
 import Footer from "./components/Footer";
+import Register from "./components/auth/Register";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <div>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/create-account" element={<Register />} />
               <Route path="/signin" element={<SignIn />} />
               <Route path="/subscribe" element={<Subscribe />} />
               <Route path="/:year/:title" element={<Article />} />
