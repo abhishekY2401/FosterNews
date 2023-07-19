@@ -1,8 +1,7 @@
-
-const SignIn = () => {
+const Register = () => {
   return (
     <div className="pt-20 flex flex-col gap-8 items-center">
-      <div className="font-lora text-3xl">Login to your account</div>
+      <div className="font-lora text-3xl">Create your account</div>
       <div>
         <div className="text-gray-500 font-libre text-sm font-bold">EMAIL</div>
         <div className="pt-1">
@@ -24,10 +23,10 @@ const SignIn = () => {
         </div>
       </div>
       <div>
-        <input type="submit" className="w-72 font-libre p-4 text-white rounded bg-red-700 cursor-pointer" value="Sign In"/>
+        <input type="submit" className="w-72 font-libre p-4 rounded text-white bg-sky-600 cursor-pointer" value="Create Account"/>
       </div>
     </div>
   );
-}
+};
 
-export default SignIn
+export default Register;
