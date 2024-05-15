@@ -58,7 +58,7 @@ const ListNews = () => {
     const article = JSON.parse(localStorage.getItem('news'));
     if (article) 
       setNews(article)
-  }, [news])
+  }, [])
   
   //   useEffect(function effect() {
   //     async function fetchArticles() {
@@ -84,28 +84,33 @@ const ListNews = () => {
         height={400}
         width={800}
       /></div>) : news.articles && news.articles.length ? (
-      news.articles.map((live_news, key) => {
+      news.articles.map((live_news) => {
         return (
-        <div key={key} className="pt-32 flex flex-col w-96">
+          live_news.map((articles, k) => {
+            return (
+              <div key={k} className="pt-32 flex flex-col w-96">
           <div className="font-kanit absolute flex items-center justify-center mt-5 ml-5 pl-8 pr-8 h-10 bg-white rounded-3xl">{live_news.category}</div>
-          <Link to={`/${new Date().getFullYear()}/${live_news.title.replaceAll(",","-")}`} state={{ "article": live_news }}>
+          <Link to={`/${articles.title}`} state={{ "article": articles }}>
             <img
-              src={live_news.images}
+              src={articles.images}
               className="w-96 h-72 rounded-2xl object-fill"
-              alt={live_news.title}
+              alt={articles.title}
             />
           </Link>
           <div className="pt-10 pb-10">
             <div className="font-libre flex text-xs text-gray-500">
-              <p>{live_news.author}&nbsp;&nbsp;-&nbsp; {new Date().getFullYear()} &nbsp;&nbsp;&nbsp;</p>
+              <p>{articles.author}&nbsp;&nbsp;-&nbsp; {new Date().getFullYear()} &nbsp;&nbsp;&nbsp;</p>
             </div>
             <div className="font-lora text-2xl text-gray-700 mt-2">
-              {live_news.title}
+              {articles.title}
             </div>
             <div className="font-playfair text-base text-gray-600 mt-2"></div>
           </div>
           
         </div>
+            )
+          })
+        
       )
        
       })

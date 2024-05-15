@@ -10,7 +10,7 @@ const Article = () => {
   const { article } = location.state;
 
   const { title, source, author, content, images } = article;
-  const description = content[0]
+  const description = content.length > 0 && content[0]
     .replace("[", " ")
     .replace("'", " ")
     .replace(")", " ")

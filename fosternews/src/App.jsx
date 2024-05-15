@@ -19,7 +19,7 @@ function App() {
               <Route path="/create-account" element={<Register />} />
               <Route path="/signin" element={<SignIn />} />
               <Route path="/subscribe" element={<Subscribe />} />
-              <Route path="/:year/:title" element={<Article />} />
+              <Route path="/:title" element={<Article />} />
             </Routes>
           </div>
           <Footer />

@@ -5,7 +5,6 @@ import Categories from "./articles/Categories";
 const Home = () => {
   return (
     <>
-      <Latest />
       <Categories />
       <div className="flex flex-wrap justify-between items-start pl-32 pr-32">
         <ListNews />
